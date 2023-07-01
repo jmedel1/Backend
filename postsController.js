@@ -1,47 +1,43 @@
 const Post = require('../models/post');
 
-// Create a new post
-const createPost = async (req, res) => {
+// Get all posts
+exports.getPosts = async (req, res) => {
   try {
-    const { title, content } = req.body;
-
-    // Create a new post object
-    const post = new Post({ title, content });
-
-    // Save the post to the database
-    await post.save();
-
-    res.status(201).json(post);
+    const posts = await Post.find();
+    res.json(posts);
   } catch (error) {
-    res.status(500).json({ message: 'Failed to create a post', error });
+    res.status(500).json({ error: 'An error occurred while fetching the posts.' });
   }
 };
 
-// Update the likes count for a post
-const updateLikes = async (req, res) => {
+// Increment the like count for a post
+exports.likePost = async (req, res) => {
   try {
     const { postId } = req.params;
-
-    // Find the post by ID
     const post = await Post.findById(postId);
-
     if (!post) {
-      return res.status(404).json({ message: 'Post not found' });
+      return res.status(404).json({ error: 'Post not found.' });
     }
-
-    // Update the likes count
-    post.likes += 1;
-
-    // Save the updated post to the database
+    post.likes++;
     await post.save();
-
     res.json(post);
   } catch (error) {
-    res.status(500).json({ message: 'Failed to update likes count', error });
+    res.status(500).json({ error: 'An error occurred while liking the post.' });
   }
 };
 
-module.exports = {
-  createPost,
-  updateLikes,
+// Increment the comment count for a post
+exports.commentOnPost = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const post = await Post.findById(postId);
+    if (!post) {
+      return res.status(404).json({ error: 'Post not found.' });
+    }
+    post.comments++;
+    await post.save();
+    res.json(post);
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred while commenting on the post.' });
+  }
 };
