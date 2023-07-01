@@ -1,14 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const postsController = require('../controllers/postsController');
 
 // Get all posts
-router.get('/posts', postsController.getPosts);
+router.get('/posts', async (req, res) => {
+  // Implementation for getting all posts
+});
 
 // Like a post
-router.put('/posts/:postId/like', postsController.likePost);
+router.put('/posts/:postId/like', async (req, res) => {
+  // Implementation for liking a post
+});
 
 // Comment on a post
-router.put('/posts/:postId/comment', postsController.commentOnPost);
+router.put('/posts/:postId/comment', async (req, res) => {
+  // Implementation for commenting on a post
+});
 
 module.exports = router;
