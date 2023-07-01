@@ -3,7 +3,8 @@ const app = express();
 const routes = require('./routes');
 
 // Set up middleware, routes, and other configurations
-// ...
+app.use(express.json()); // Parse JSON bodies
+app.use(routes); // Add routes
 
 // Start the server
 const port = process.env.PORT || 3000;
