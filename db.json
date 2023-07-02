@@ -1,19 +1,11 @@
 {
   "posts": [
     {
-      "id": 1,
+      "_id": "1", // Use "_id" instead of "id" to match the frontend 
       "title": "json-server",
-      "author": "typicode"
+      "author": "typicode",
+      "likes": 0, // Add a "likes" property to track the number of likes
+      "comments": [] // Add an empty array to track comments for each post
     }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
